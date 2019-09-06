@@ -36,7 +36,7 @@ export default props => {
       <thead>
         <tr>
           <th>Descricao</th>
-          <th>acoes</th>
+          <th className="tableActions">acoes</th>
         </tr>
       </thead>
       <tbody>{renderRows()}</tbody>
