@@ -11,6 +11,7 @@ export default props => (
         placeholder="Adcione uma tarefa"
       ></input>
     </Grid>
+
     <Grid cols="12 3 2">
       <IconButton style="primary" icon="plus" />
     </Grid>
