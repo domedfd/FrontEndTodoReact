@@ -31,15 +31,39 @@ export default props => {
     ));
   };
 
-  return (
-    <table className="table">
-      <thead>
-        <tr>
-          <th>Descricao</th>
-          <th className="tableActions">acoes</th>
-        </tr>
-      </thead>
-      <tbody>{renderRows()}</tbody>
-    </table>
-  );
+  if (props.list.length > 0) {
+    return (
+      <table className="table">
+        <thead>
+          <tr>
+            <th>Descricao</th>
+            <th className="tableActions">acoes</th>
+          </tr>
+        </thead>
+        <tbody>{renderRows()}</tbody>
+      </table>
+    );
+  } else {
+    return (
+      <div>
+        <center>
+          <h2>Voce esta sem tarefas</h2>
+        </center>
+        <h3>
+          <p>Legenda de atalhos</p>
+        </h3>
+        <ul>
+          <li>
+            <strong>Enter:</strong> Adiciona uma nova tarefa.
+          </li>
+          <li>
+            <strong>Shift + Enter:</strong> Pesquisa a tarefa informada
+          </li>
+          <li>
+            <strong>ESC:</strong> Limpa e atualiza a tela.
+          </li>
+        </ul>
+      </div>
+    );
+  }
 };

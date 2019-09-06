@@ -37,8 +37,12 @@ export default class todo extends Component {
   }
 
   handleAdd() {
-    const description = this.state.description;
-    axios.post(URL, { description }).then(resp => this.refresh());
+    if (this.state.description === "") {
+      alert("Por favor insira alguma tarefa!");
+    } else {
+      const description = this.state.description;
+      axios.post(URL, { description }).then(resp => this.refresh());
+    }
   }
 
   handleRemove(todo) {
@@ -59,8 +63,9 @@ export default class todo extends Component {
       .then(resp => this.refresh(this.state.description));
   }
 
-  handleSearch() {
+  handleSearch(e) {
     this.refresh(this.state.description);
+    document.getElementById("description").select();
   }
 
   handleClear() {
