@@ -56,7 +56,7 @@ export const markAsPending = todo => {
   };
 };
 
-export const remove = dispatch => {
+export const remove = todo => {
   return dispatch => {
     axios.delete(`${URL}/${todo._id}`).then(resp => dispatch(search()));
   };
