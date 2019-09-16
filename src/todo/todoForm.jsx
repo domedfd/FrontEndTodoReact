@@ -9,6 +9,12 @@ class TodoForm extends Component {
   constructor(props) {
     super(props);
     this.keyHendler = this.keyHendler.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.props.search();
+    document.getElementById("description").select();
   }
 
   componentWillMount() {
@@ -18,9 +24,7 @@ class TodoForm extends Component {
   keyHendler(e) {
     const { add, clear, search, description } = this.props;
     if (e.key === "Enter") {
-      e.shiftKey
-        ? add(description)
-        : (search(), document.getElementById("description").select());
+      e.shiftKey ? add(description) : this.handleClick();
     } else if (e.key === "Escape") {
       clear();
     }
@@ -47,15 +51,7 @@ class TodoForm extends Component {
             icon="plus"
             onClick={() => add(description)}
           />
-          <IconButton
-            style="info"
-            icon="search"
-            onClick={() => {
-              search();
-              document.getElementById("description").select();
-              return null;
-            }}
-          />
+          <IconButton style="info" icon="search" onClick={this.handleClick} />
           <IconButton style="default" icon="close" onClick={this.props.clear} />
         </Grid>
       </div>
