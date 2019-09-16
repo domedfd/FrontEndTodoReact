@@ -8,30 +8,25 @@ export const changeDescription = event => ({
 });
 
 export const search = () => {
-  const request = axios.get(`${URL}?sort=-createdAt`);
-  return {
-    type: "TODO_SEARCHED",
-    payload: request
+  return (dispatch, getState) => {
+    const description = getState().todo.description;
+    const search = description ? `&description__regex=/${description}/` : "";
+    const request = axios
+      .get(`${URL}?sort=-createdAt${search}`)
+      .then(resp => dispatch({ type: "TODO_SEARCHED", payload: resp.data }));
   };
 };
 
-// export const add = description => {
-//   const request = axios.post(URL, { description });
-//   return [
-//     {
-//       type: "TODO_ADDED",
-//       payload: request
-//     },
-//     search()
-//   ];
-// };
-
 export const add = description => {
   return dispatch => {
-    axios
-      .post(URL, { description })
-      .then(resp => dispatch(clear()))
-      .then(resp => dispatch(search()));
+    if (description) {
+      axios
+        .post(URL, { description })
+        .then(resp => dispatch(clear()))
+        .then(resp => dispatch(search()));
+    } else {
+      alert("adcione una descripcion.");
+    }
   };
 };
 
@@ -58,7 +53,21 @@ export const remove = todo => {
 };
 
 export const clear = () => {
-  return {
-    type: "TODO_CLEAR"
-  };
+  return [
+    {
+      type: "TODO_CLEAR"
+    },
+    search()
+  ];
 };
+
+// export const add = description => {
+//   const request = axios.post(URL, { description });
+//   return [
+//     {
+//       type: "TODO_ADDED",
+//       payload: request
+//     },
+//     search()
+//   ];
+// };

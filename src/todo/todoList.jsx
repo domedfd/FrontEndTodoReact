@@ -57,10 +57,10 @@ const TodoList = props => {
         </h3>
         <ul>
           <li>
-            <strong>Enter:</strong> Adiciona uma nova tarefa.
+            <strong>Shift + Enter:</strong> Adiciona uma nova tarefa.
           </li>
           <li>
-            <strong>Shift + Enter:</strong> Pesquisa a tarefa informada
+            <strong>Enter:</strong> Pesquisa a tarefa informada.
           </li>
           <li>
             <strong>ESC:</strong> Limpa e atualiza a tela.

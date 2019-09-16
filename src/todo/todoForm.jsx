@@ -18,7 +18,9 @@ class TodoForm extends Component {
   keyHendler(e) {
     const { add, clear, search, description } = this.props;
     if (e.key === "Enter") {
-      e.shiftKey ? add(description) : search();
+      e.shiftKey
+        ? add(description)
+        : (search(), document.getElementById("description").select());
     } else if (e.key === "Escape") {
       clear();
     }
@@ -45,7 +47,15 @@ class TodoForm extends Component {
             icon="plus"
             onClick={() => add(description)}
           />
-          <IconButton style="info" icon="search" onClick={() => search()} />
+          <IconButton
+            style="info"
+            icon="search"
+            onClick={() => {
+              search();
+              document.getElementById("description").select();
+              return null;
+            }}
+          />
           <IconButton style="default" icon="close" onClick={this.props.clear} />
         </Grid>
       </div>
